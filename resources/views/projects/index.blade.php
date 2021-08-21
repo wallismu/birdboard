@@ -11,9 +11,13 @@
     <h1>Birdboard</h1>
 
     <ul>
-        @foreach ($projects as $p)
-            <li>{{ $p->title }}</li>
-        @endforeach
+        @forelse ($projects as $p)
+            <li>
+                <a href="{{ $p->path() }}">{{ $p->title }}</a>
+            </li>
+        @empty
+            Big empty, chief 
+        @endforelse
     </ul>
     
 </body>

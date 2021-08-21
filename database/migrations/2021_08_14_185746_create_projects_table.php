@@ -15,9 +15,14 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('owner_id');
             $table->string('title');
             $table->longText('description');
             $table->timestamps();
+
+            // Cascade: if user deletes their acct, all their projects are also deleted
+            // Bro that's WILD 
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
